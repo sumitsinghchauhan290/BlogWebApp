@@ -25,3 +25,25 @@ Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To u
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+
+## Clone the Repository:##
+Clone the BlogWebAPP repository from https://github.com/sumitsinghchauhan290/BlogWebApp
+
+## API URL ##
+Please set your web API hosting URL in the Config.json file before running the application.
+
+## Application Structure
+
+The BlogWebAPP application is created using the Model View Controller (MVC) architecture pattern. This pattern separates concerns into three main components: Model, View, and Controller. 
+
+- **Components:**
+  - All components are organized inside the `components` folder. Each component is responsible for handling the presentation logic and user interaction.
+
+- **Services:**
+  - Services are placed inside the `services` folder. They handle the business logic, such as fetching data from the JSON file or managing operations like pagination, deletion, etc.
+
+- **Models:**
+  - The `models` folder contains classes that represent the data structure of the application, such as the `Blog` model.
+
+This architecture ensures a clean separation of concerns, making the application easier to maintain and extend. By organizing the code into different folders based on their type, the application structure remains intuitive and scalable.
+
