@@ -1,0 +1,8 @@
+textarea {
+  resize: none;
+}
+
+.fixed-height {
+  height: 120px; 
+  overflow: auto;
+}

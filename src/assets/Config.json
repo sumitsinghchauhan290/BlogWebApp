@@ -1,0 +1,5 @@
+{
+    "Api": {
+        "log": "https://localhost:7129/api"
+    }
+}
