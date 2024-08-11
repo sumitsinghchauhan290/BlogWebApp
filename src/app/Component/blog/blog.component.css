@@ -6,3 +6,35 @@ textarea {
   height: 120px; 
   overflow: auto;
 }
+label span{
+  color: red;
+}
+.viewTemplate{
+  cursor: default;
+}
+.username {
+  max-width: 150px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.card-text {
+  margin-bottom: 10px;
+}
+
+.viewTemplate .d-flex .createdBy {
+  margin-right: 15px;
+  display: flex;
+  align-items: center;
+}
+
+.viewTemplate .d-flex .createdBy strong {
+  margin-right: 5px;
+}
+
+.viewTemplate .btn {
+  margin-left: 5px;
+}

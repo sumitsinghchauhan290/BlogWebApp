@@ -17,7 +17,6 @@ export class HttpInterceptorInterceptor implements HttpInterceptor {
     if (request.url !== 'assets/Config.json') {
       return this.getUrl().pipe(
         switchMap((url: string) => {
-          const serviceUrl = `${url}`;
           const apiRequest = request.clone({ url: `${url}${request.url}` });
           return next.handle(apiRequest);
         })
@@ -25,7 +24,8 @@ export class HttpInterceptorInterceptor implements HttpInterceptor {
     }
     return next.handle(request);
   }
+
   private getUrl(): Observable<string> {
-    return this.config.getApiUrl();
+    return this.config.getApiUrl(); 
   }
 }

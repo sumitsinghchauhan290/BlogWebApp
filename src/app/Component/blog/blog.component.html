@@ -3,19 +3,18 @@
         <div *ngIf="isEdit; else viewMode">
             <form [formGroup]="blogForm">
                 <div class="mb-3">
-                    <label for="Text" class="form-label">Blog Text</label>
+                    <label for="Text" class="form-label">Blog Text<span>*</span></label>
                     <textarea id="Text" formControlName="Text" name="Text" class="form-control" rows="5"></textarea>
                 </div>
                 <div class="row">
                     <div class="col-md-6 mb-3">
-                        <label for="username" class="form-label">Username</label>
+                        <label for="username" class="form-label">Username<span>*</span></label>
                         <input type="text" id="username" formControlName="UsernameName" name="username"
                             class="form-control">
                     </div>
                     <div class="col-md-6 mb-3">
-                        <label for="DateCreated" class="form-label">Date Created</label>
-                        <input id="DateCreated" formControlName="DateCreated" name="DateCreated"
-                            class="form-control">
+                        <label for="DateCreated" class="form-label">Date Created<span>*</span></label>
+                        <input id="DateCreated" formControlName="DateCreated" name="DateCreated" class="form-control">
                     </div>
                 </div>
                 <div>
@@ -26,30 +25,27 @@
             </form>
         </div>
         <ng-template #viewMode>
-            <div>
-                <div class="card-text border-black fixed-height">{{ blog.text }}</div>
-                <div class="d-flex justify-content-between">
-                    <div class="d-flex justify-content-between">
-                        <div class="m-sm-2">
-                            <label><strong>Created By: &nbsp;</strong></label>
-                            <label>{{ blog.username }}</label>
+            <div class="viewTemplate">
+                <div class="card-text border-black fixed-height">
+                    {{ blog.text }}
+                </div>
+                <div class="d-flex justify-content-between align-items-center mt-3">
+                    <div class="d-flex align-items-center">
+                        <div class="m-sm-2 createdBy">
+                            <strong>Created By: &nbsp;</strong>
+                            <span class="username">{{ blog.username }}</span>
                         </div>
                         <div class="m-sm-2">
-                            <label ><strong>Created Date: &nbsp;</strong></label>
-                            <label>{{ blog.dateCreated | date:'dd/MM/yyyy' }}</label>
+                            <strong>Created Date: &nbsp;</strong>
+                            <span>{{ blog.dateCreated | date:'dd/MM/yyyy' }}</span>
                         </div>
-    
                     </div>
-    
-                    <div>
+                    <div class="d-flex">
                         <button type="button" class="btn btn-primary me-2" (click)="editBlog()">Edit</button>
                         <button type="button" class="btn btn-danger" (click)="deleteBlog()">Delete</button>
                     </div>
                 </div>
-                
-            </div>
-
-
+            </div>                  
         </ng-template>
     </div>
 </div>
