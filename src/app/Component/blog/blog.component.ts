@@ -28,18 +28,35 @@ export class BlogComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.bindBlogForm();
+    this.bindBlogForm(false);
 
     if (this.blog.isNew) {
       this.isEdit = true;
     }
   }
-  bindBlogForm() {
-    this.blogForm = this.formBuilder.group({
-      UsernameName: [this.blog.username, [Validators.required, Validators.maxLength(255)]],
-      DateCreated: [{ value: this.datepipe.transform(this.blog.dateCreated, 'dd/MM/yyyy') || '', disabled: true }, [Validators.required]],
-      Text: [this.blog.text, [Validators.required]],
-    });
+  bindBlogForm(forEdit: boolean) {
+    if (forEdit) {
+      this.blogService.getBlog(this.blog.id).subscribe({
+        next: (item: Blog) => {
+
+          this.isEdit = true;
+          this.originalBlog = { ...this.blog };
+
+          this.blogForm = this.formBuilder.group({
+            UsernameName: [item.username, [Validators.required, Validators.maxLength(255)]],
+            DateCreated: [{ value: this.datepipe.transform(item.dateCreated, 'dd/MM/yyyy') || '', disabled: true }, [Validators.required]],
+            Text: [item.text, [Validators.required]],
+          });
+        }
+      })
+    } else {
+      this.blogForm = this.formBuilder.group({
+        UsernameName: [this.blog.username, [Validators.required, Validators.maxLength(255)]],
+        DateCreated: [{ value: this.datepipe.transform(this.blog.dateCreated, 'dd/MM/yyyy') || '', disabled: true }, [Validators.required]],
+        Text: [this.blog.text, [Validators.required]],
+      });
+    }
+
   }
   saveBlog(): void {
     const blogForApi: BlogForApi = {
@@ -87,6 +104,7 @@ export class BlogComponent implements OnInit {
     }
     this.isEdit = false;
   }
+
   deleteBlog(): void {
     if (confirm("Are you sure you want to delete this blog?")) {
       this.delete.emit(this.blog);
@@ -94,10 +112,9 @@ export class BlogComponent implements OnInit {
   }
 
   editBlog(): void {
-    this.isEdit = true;
-    this.originalBlog = { ...this.blog };
-    this.bindBlogForm();
+    this.bindBlogForm(true);
   }
+
   blogValidator(blog: BlogForApi): boolean {
     if (!blog.id || blog.id == 0) {
       return false;
@@ -113,7 +130,7 @@ export class BlogComponent implements OnInit {
     }
     return true;
   }
-  showFormAlert(){
+  showFormAlert() {
     alert("Please complete all required fields before submitting the form.");
   }
 }

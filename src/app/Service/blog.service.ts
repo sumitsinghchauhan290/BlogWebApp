@@ -18,6 +18,11 @@ export class BlogService {
     return this.http.get<Blog[]>(url);
   }
 
+  getBlog(id:number): Observable<Blog> {
+    const url = `${this.baseUrl}/GetBlog`;
+    return this.http.get<Blog>(`${url}/${id}`);
+  }
+
   createBlog(blog: Blog): Observable<Blog> {
     const url = `${this.baseUrl}/CreateBlog`;
     return this.http.post<Blog>(url, blog);

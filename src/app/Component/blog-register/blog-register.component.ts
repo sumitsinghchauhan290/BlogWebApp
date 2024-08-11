@@ -14,6 +14,10 @@ export class BlogRegisterComponent implements OnInit {
   constructor(private blogService: BlogService) { }
 
   ngOnInit(): void {
+    this.getBlogList();
+  }
+  
+  getBlogList() {
     this.blogService.getBlogs().subscribe((blogs: any) => {
       this.blogs = blogs
     });
