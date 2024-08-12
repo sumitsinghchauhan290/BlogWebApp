@@ -63,7 +63,7 @@ export class BlogRegisterComponent implements OnInit, AfterViewInit, OnDestroy {
 
       this.blogService.deleteBlog(blog.id).subscribe({
         next: (r: any) => {
-          this.blogs = this.blogs.filter(b => b !== blog);
+          this.getBlogList(this.searchTerm, this.currentPage, 10);
         },
         error: (err: Error) => {
           alert("Blog is not deleted. Something went wrong.")
