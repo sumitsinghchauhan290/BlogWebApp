@@ -1,5 +1,5 @@
-import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { Injectable, OnDestroy } from '@angular/core';
+import { Observable, Subject } from 'rxjs';
 import { Blog } from '../Model/blog';
 import { HttpClient, HttpParams } from '@angular/common/http';
 
@@ -7,18 +7,22 @@ import { HttpClient, HttpParams } from '@angular/common/http';
   providedIn: 'root'
 })
 
-export class BlogService {
+export class BlogService implements OnDestroy{
 
   private baseUrl = '/Blog';
-
+  public reloadData: Subject<boolean> = new Subject<boolean>();
   constructor(private http: HttpClient) { }
-
-  getBlogs(): Observable<Blog[]> {
-    const url = `${this.baseUrl}/GetBlogs`;
-    return this.http.get<Blog[]>(url);
+  
+  ngOnDestroy(): void {
+    this.reloadData.complete(); 
   }
 
-  getBlog(id:number): Observable<Blog> {
+  getBlogs(searchTerm: string, pageNumber: number, pageSize: number): Observable<Blog[]> {
+    const url = `${this.baseUrl}/GetBlogs`;
+    return this.http.get<Blog[]>(`${url}?searchTerm=${searchTerm}&pageNumber=${pageNumber}&pageSize=${pageSize}`);
+  }
+
+  getBlog(id: number): Observable<Blog> {
     const url = `${this.baseUrl}/GetBlog`;
     return this.http.get<Blog>(`${url}/${id}`);
   }
@@ -37,5 +41,4 @@ export class BlogService {
     const url = `${this.baseUrl}/DeleteBlog`;
     return this.http.delete<void>(`${url}/${id}`);
   }
-  
 }

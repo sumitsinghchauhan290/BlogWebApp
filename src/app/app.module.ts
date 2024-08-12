@@ -9,6 +9,7 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { HttpInterceptorInterceptor } from './Interceptor/http-interceptor.interceptor';
 import { DatePipe } from '@angular/common';
 import { GlobalErrorHandlerInterceptor } from './Interceptor/global-error-handler.interceptor';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { GlobalErrorHandlerInterceptor } from './Interceptor/global-error-handle
     AppRoutingModule,
     HttpClientModule,
     ReactiveFormsModule,
+    FormsModule,
     DatePipe
   ],
   providers: [{

@@ -75,6 +75,7 @@ export class BlogComponent implements OnInit {
           this.blog.id = response.id
           this.blog.text = response.text;
           this.blog.username = response.username;
+          this.blogService.reloadData.next(true);
         });
       } else {
         this.blogService.updateBlog(blogForApi.id, blogForApi).subscribe(response => {
@@ -83,8 +84,10 @@ export class BlogComponent implements OnInit {
           this.blog.isNew = false;
           this.blog.text = blogForApi.text;
           this.blog.username = blogForApi.username;
+          this.blogService.reloadData.next(true);
         });
       }
+      
     }
 
   }

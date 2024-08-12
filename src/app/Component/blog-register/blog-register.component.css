@@ -1,0 +1,16 @@
+.blog-list {
+    margin: 20px 0;
+  }
+  
+  .blog-item {
+    border-bottom: 1px solid #ccc;
+    padding: 10px 0;
+  }
+  
+  .pagination-controls {
+    margin-top: 20px;
+  }
+  
+  .pagination-controls button {
+    margin: 0 5px;
+  }

@@ -1,13 +1,33 @@
+<!-- blog-register.component.html -->
 <div class="container mt-4">
     <div class="text-center mb-4">
-        <h2>Blog Application</h2>
+      <h2>Blog Application</h2>
     </div>
     <div class="d-flex justify-content-center mb-4">
-        <button class="btn btn-primary" (click)="CreateBlog()">Create New Blog</button>
+      <button class="btn btn-primary" (click)="CreateBlog()">Create New Blog</button>
+    </div>
+    <div class="d-flex justify-content-center mb-4">
+      <input type="text" class="form-control w-50" placeholder="Search blogs..." [(ngModel)]="searchTerm" (input)="filterBlogs()" />
     </div>
     <div class="row">
-        <div class="col-12" *ngFor="let blog of blogs">
-            <app-blog [blog]="blog" (delete)="onDeleteBlog($event)" (undoNewCreatedBlog)="undoNewCreatedBlog(blog)"></app-blog>
-        </div>
+      <div class="col-12" *ngFor="let blog of blogs">
+        <app-blog [blog]="blog" (delete)="onDeleteBlog($event)" (undoNewCreatedBlog)="undoNewCreatedBlog(blog)"></app-blog>
+      </div>
+      <div class="pagination-controls d-flex justify-content-center align-items-center my-4">
+        <nav aria-label="Page navigation">
+          <ul class="pagination">
+            <li class="page-item" [class.disabled]="currentPage === 1">
+              <button class="page-link" (click)="previousPage()">Previous</button>
+            </li>
+            <li class="page-item disabled">
+              <span class="page-link">Page {{ currentPage }} of {{ totalPages }}</span>
+            </li>
+            <li class="page-item" [class.disabled]="currentPage === totalPages">
+              <button class="page-link" (click)="nextPage()">Next</button>
+            </li>
+          </ul>
+        </nav>
+      </div>
     </div>
-</div>
+  </div>
+  
